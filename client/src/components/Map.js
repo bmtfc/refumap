@@ -11,6 +11,9 @@ export default function Map() {
           lng: 77.01502627,
         }}
         defaultZoom={11}
+        options={{
+          fullscreenControl: false,
+        }}
       >
         {[]}
       </GoogleMapReact>
