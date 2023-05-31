@@ -28,6 +28,23 @@
   color: #61dafb;
 }
 
+.filters {
+  position: fixed;
+  background-color: transparent;
+  width: 100%;
+  max-width: 864px;
+  bottom: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.filters > svg {
+  width: 53px;
+  height: 53px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
