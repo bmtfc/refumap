@@ -1,15 +1,12 @@
-import OtherIcon from "../icons/Other";
 import GoogleMap from "google-maps-react-markers";
+import Marker from "./Marker";
 
-const Marker = ({ setSidebarOpen }) => {
-  return (
-    <div className="marker" onClick={() => setSidebarOpen(true)}>
-      <OtherIcon />
-    </div>
-  );
-};
-
-export default function Map({ setSidebarOpen }) {
+export default function Map({
+  setSidebarOpen,
+  selectedMarkers,
+  setSelectedMarker,
+  selectedMarker,
+}) {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMap
@@ -23,11 +20,17 @@ export default function Map({ setSidebarOpen }) {
           fullscreenControl: false,
         }}
       >
-        <Marker
-          setSidebarOpen={setSidebarOpen}
-          lat={52.240927}
-          lng={21.024115}
-        />
+        {selectedMarkers.map((marker) => {
+          return (
+            <Marker
+              setSidebarOpen={setSidebarOpen}
+              {...marker}
+              key={marker.id}
+              setSelectedMarker={setSelectedMarker}
+              selectedMarker={selectedMarker}
+            />
+          );
+        })}
       </GoogleMap>
     </div>
   );

@@ -1,4 +1,4 @@
-function PsychologicalAssistanceIcon() {
+function PsychologicalAssistanceIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +6,7 @@ function PsychologicalAssistanceIcon() {
       height="100"
       fill="none"
       viewBox="0 0 100 100"
+      {...props}
     >
       <circle cx="50" cy="50" r="50" fill="#ED76A1"></circle>
       <circle cx="50" cy="50" r="50" stroke="#000"></circle>

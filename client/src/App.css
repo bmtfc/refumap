@@ -38,11 +38,20 @@
   transform: translate(-50%, 0);
 }
 
+.category-selected {
+  filter: grayscale(0) !important;
+}
+
 .filters > svg {
   width: 53px;
   height: 53px;
   margin: 0 5px;
   cursor: pointer;
+  filter: grayscale(1);
+}
+
+.filters-selected > svg {
+  filter: grayscale(0);
 }
 
 .sidebar {
@@ -56,6 +65,12 @@
 .marker {
   position: absolute;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.marker > svg {
+  width: 42px;
+  height: 43px;
 }
 
 @keyframes App-logo-spin {
