@@ -1,11 +1,12 @@
 import GoogleMap from "google-maps-react-markers";
 import Marker from "./Marker";
 
-export default function Map({
+function Map({
   setSidebarOpen,
   selectedMarkers,
   setSelectedMarker,
   selectedMarker,
+  onGoogleApiLoaded,
 }) {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
@@ -21,6 +22,7 @@ export default function Map({
           mapTypeControl: false,
           streetViewControl: false,
         }}
+        onGoogleApiLoaded={onGoogleApiLoaded}
       >
         {selectedMarkers.map((marker) => {
           return (
@@ -37,3 +39,5 @@ export default function Map({
     </div>
   );
 }
+
+export default Map;

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 import Map from "./components/Map";
 import Filters from "./components/Filters";
 import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -10,6 +11,7 @@ function App() {
   const [allMarkers, setAllMarkers] = useState([]);
   const [selectedMarkers, setSelectedMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [mapReady, setMapReady] = useState(false);
 
   useEffect(() => {
     // fetch markers
@@ -93,6 +95,9 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!allMarkers.length) {
+      return;
+    }
     if (category === "all") {
       setSelectedMarkers(allMarkers);
       return;
@@ -103,14 +108,23 @@ function App() {
     setSelectedMarkers(filteredMarkers);
   }, [category]);
 
+  const mapRef = useRef(null);
+
+  const onGoogleApiLoaded = ({ map }) => {
+    mapRef.current = map;
+    setMapReady(true);
+  };
+
   return (
     <div className="App">
+      {mapReady && <Header mapRef={mapRef} />}
       {sidebarOpen && <Sidebar {...selectedMarker} />}
       <Map
         setSidebarOpen={setSidebarOpen}
         selectedMarkers={selectedMarkers}
         setSelectedMarker={setSelectedMarker}
         selectedMarker={selectedMarker}
+        onGoogleApiLoaded={onGoogleApiLoaded}
       />
       <Filters setCategory={setCategory} category={category} />
     </div>
