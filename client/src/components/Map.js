@@ -10,7 +10,7 @@ export default function Map({
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMap
-        apiKey="AIzaSyCpXLdGfpW0RtEPPDZBSgs4kB3EHDGfOeY"
+        apiKey="AIzaSyDdXJ9K8w8CVA8FHBsestW77mdwzpDxZ2o"
         defaultCenter={{
           lat: 52.240927,
           lng: 21.024115,
