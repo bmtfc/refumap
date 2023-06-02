@@ -18,6 +18,8 @@ export default function Map({
         defaultZoom={11}
         options={{
           fullscreenControl: false,
+          mapTypeControl: false,
+          streetViewControl: false,
         }}
       >
         {selectedMarkers.map((marker) => {

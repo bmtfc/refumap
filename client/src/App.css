@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+.header {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  top: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+}
+
+.search {
+  width: 500px;
+}
+
 .filters {
   position: fixed;
   background-color: transparent;

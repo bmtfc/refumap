@@ -37,7 +37,7 @@ const Filters = ({ setCategory, category }) => {
       <FoodAidIcon
         id="foodAid"
         onClick={changeCategory}
-        className={`${category === "oodAid" ? "category-selected" : ""}`}
+        className={`${category === "foodAid" ? "category-selected" : ""}`}
       />
       <GovernmentBodiesIcon
         id="governmentBodies"
@@ -76,7 +76,7 @@ const Filters = ({ setCategory, category }) => {
         id="oralWrittenTranslation"
         onClick={changeCategory}
         className={`${
-          category === "ralWrittenTranslation" ? "category-selected" : ""
+          category === "oralWrittenTranslation" ? "category-selected" : ""
         }`}
       />
       <PsychologicalAssistanceIcon
