@@ -12,6 +12,7 @@ function App() {
   const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
+    // fetch markers
     const markers = [
       {
         id: 1,
@@ -97,7 +98,7 @@ function App() {
       return;
     }
     const filteredMarkers = allMarkers.filter(
-      ({ marker }) => marker.category === category
+      (marker) => marker.category === category
     );
     setSelectedMarkers(filteredMarkers);
   }, [category]);
