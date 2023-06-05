@@ -12,23 +12,23 @@ const sequelize = new Sequelize('refumap_db', 'root', '3Hun$fo0ss5', {
   dialect: 'mysql'
 });
 
-const Marker = sequelize.define('marker', {
+const Location = sequelize.define('location', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
     allowNull: false
   },
-  name: {
+  m_name: {
     type: Sequelize.STRING(100),
     allowNull: false
   },
   longitude: {
-    type: Sequelize.DECIMAL(9, 12),
+    type: Sequelize.DECIMAL(12, 8),
     allowNull: false
   },
   latitude: {
-    type: Sequelize.DECIMAL(9, 12),
+    type: Sequelize.DECIMAL(12, 8),
     allowNull: false
   },
   country: {
@@ -39,7 +39,7 @@ const Marker = sequelize.define('marker', {
     type: Sequelize.STRING(50),
     allowNull: false
   },
-  address: {
+  m_address: {
     type: Sequelize.STRING(100),
     allowNull: false
   },
@@ -51,11 +51,14 @@ const Marker = sequelize.define('marker', {
     type: Sequelize.STRING(50),
     allowNull: false
   },
-  description: {
+  m_description: {
     type: Sequelize.TEXT,
     allowNull: false
   }
+}, {
+  timestamps: false
 });
+
 
 const User = sequelize.define('user', {
   id: {
@@ -76,6 +79,8 @@ const User = sequelize.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   }
+}, {
+  timestamps: false
 });
 
 
@@ -97,22 +102,22 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Get marker by ID
-app.get('/marker/:id', async (req, res) => {
+// Get location by ID
+app.get('/location/:id', async (req, res) => {
   try {
-    const marker = await Marker.findByPk(req.params.id);
+    const location = await Location.findByPk(req.params.id);
 
-    if (marker) {
+    if (location) {
       res.json({
-        id: marker.id,
-        category: marker.category,
-        name: marker.name,
-        time: marker.work_time,
-        description: marker.description,
-        address: marker.address,
+        id: location.id,
+        category: location.category,
+        name: location.m_name,
+        time: location.work_time,
+        description: location.m_description,
+        address: location.m_address,
       });
     } else {
-      res.status(404).send('Marker not found');
+      res.status(404).send('Location not found');
     }
   } catch (error) {
     console.error(error);
@@ -120,16 +125,16 @@ app.get('/marker/:id', async (req, res) => {
   }
 });
 
-// Get all markers
-app.get('/markers', async (req, res) => {
+// Get all locations
+app.get('/locations', async (req, res) => {
   try {
-    const markers = await Marker.findAll();
+    const locations = await Location.findAll();
 
-    const response = markers.map(marker => ({
-      id: marker.id,
-      lat: marker.latitude,
-      lng: marker.longitude,
-      category: marker.category,
+    const response = locations.map(location => ({
+      id: location.id,
+      lat: location.latitude,
+      lng: location.longitude,
+      category: location.category,
     }));
 
     res.json(response);
@@ -139,25 +144,25 @@ app.get('/markers', async (req, res) => {
   }
 });
 
-// Додати маркер
-app.post('/marker', async (req, res) => {
+// Додати локацію
+app.post('/location', async (req, res) => {
   try {
-    const marker = await Marker.create(req.body);
-    res.status(201).json(marker);
+    const location = await Location.create(req.body);
+    res.status(201).json(location);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
   }
 });
 
-// Видалити маркер
-app.delete('/marker/:id', async (req, res) => {
+// Видалити локацію
+app.delete('/location/:id', async (req, res) => {
   try {
-    const marker = await Marker.findByPk(req.params.id);
+    const location = await Location.findByPk(req.params.id);
 
-    if (!marker) return res.status(404).send('Marker not found');
+    if (!location) return res.status(404).send('Location not found');
 
-    await marker.destroy();
+    await location.destroy();
     res.status(204).send();
   } catch (error) {
     console.error(error);
@@ -165,21 +170,20 @@ app.delete('/marker/:id', async (req, res) => {
   }
 });
 
-// Редагувати маркер
-app.put('/marker/:id', async (req, res) => {
+// Редагувати локацію
+app.put('/location/:id', async (req, res) => {
   try {
-    const marker = await Marker.findByPk(req.params.id);
+    const location = await Location.findByPk(req.params.id);
 
-    if (!marker) return res.status(404).send('Marker not found');
+    if (!location) return res.status(404).send('Location not found');
 
-    await marker.update(req.body);
-    res.json(marker);
+    await location.update(req.body);
+    res.json(location);
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
   }
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
